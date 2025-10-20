@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prompt Optimizer</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script type="importmap">
+    {
+      "imports": {
+        "@google/genai": "https://esm.sh/@google/genai@^0.14.0"
+      }
+    }
+  </script>
+  <script type="module" src="index.tsx"></script>
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Prompt Optimizer</h1>
+      <button id="settings-button" title="Settings">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+      </button>
+    </header>
+    <p class="subtitle">Enter your prompt below and let AI craft a better, more effective version.</p>
+    
+    <div class="input-section">
+      <label for="original-prompt">Your Prompt</label>
+      <div class="textarea-wrapper">
+        <textarea id="original-prompt" rows="5" placeholder="e.g., write a story"></textarea>
+        <button id="copy-original-button" class="copy-button" title="Copy to clipboard">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+            <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <div class="cta-section">
+      <button id="improve-button">Improve Prompt</button>
+      <p id="status" role="status" aria-live="polite"></p>
+    </div>
+
+    <div class="infographic">
+       <svg width="100%" viewBox="0 0 800 120" preserveAspectRatio="xMidYMid meet">
+        <!-- Step 1 -->
+        <g class="step">
+          <rect x="10" y="10" width="220" height="100" rx="12"></rect>
+          <text x="120" y="65" text-anchor="middle">1. Your Prompt</text>
+        </g>
+        <!-- Arrow 1 -->
+        <path d="M240 60 L 280 60" class="arrow"></path>
+        <!-- Step 2 -->
+        <g class="step">
+          <rect x="290" y="10" width="220" height="100" rx="12"></rect>
+          <text x="400" y="65" text-anchor="middle">2. AI Optimization</text>
+        </g>
+        <!-- Arrow 2 -->
+        <path d="M520 60 L 560 60" class="arrow"></path>
+        <!-- Step 3 -->
+        <g class="step">
+          <rect x="570" y="10" width="220" height="100" rx="12"></rect>
+          <text x="680" y="65" text-anchor="middle">3. Enhanced Output</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="output-container">
+        <div class="output-section">
+            <label for="improved-prompt">Improved Prompt</label>
+            <div class="textarea-wrapper">
+              <textarea id="improved-prompt" rows="8" readonly placeholder="The improved prompt will appear here..."></textarea>
+              <button id="copy-improved-button" class="copy-button" title="Copy to clipboard">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                  <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                </svg>
+              </button>
+            </div>
+        </div>
+        <div class="output-section">
+            <label for="explanation">Explanation</label>
+            <div class="textarea-wrapper">
+              <textarea id="explanation" rows="8" readonly placeholder="The explanation will appear here..."></textarea>
+              <button id="copy-explanation-button" class="copy-button" title="Copy to clipboard">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                  <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                </svg>
+              </button>
+            </div>
+        </div>
+    </div>
+  </main>
+
+  <div id="api-key-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <button id="close-modal-button" class="close-button" title="Close">&times;</button>
+      <h2>Set Your Gemini API Key</h2>
+      <p>Please enter your API key to use the Prompt Optimizer. Your key is stored locally in your browser and is never shared.</p>
+      <div class="input-group">
+        <label for="api-key-input">API Key</label>
+        <input type="password" id="api-key-input" placeholder="Enter your key here">
+      </div>
+      <button id="save-key-button">Save and Close</button>
+    </div>
+  </div>
+
+</body>
+</html>
